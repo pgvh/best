@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>2D Painter</title>
+		<style>
+		</style>
+	</head>
+	<body>
+		 <canvas id="myCanvas" width="800" height="800" style="border:1px solid #000000;"></canvas>
+    <script>
+    
+   	  var clicks = new Array();
+   	  var i=0;
+   	  
+      function writeMessage(canvas, message) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.font = '20px Agency FB';
+        context.fillStyle = 'black';
+        context.fillText(message, 10, 25);
+      }
+      
+      function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+      
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      canvas.addEventListener('click', function(evt) {
+      	var mousePos = getMousePos(canvas, evt);
+      	clicks[i] = mousePos;
+      	
+      	console.log(clicks[i].x, clicks[i].y);
+      	i++;
+      	if (i==4)
+      	{
+      		console.log("i is 4");
+      		drawCurve(clicks[0].x,clicks[0].y,clicks[1].x,clicks[1].y,clicks[2].x,clicks[2].y,clicks[3].x,clicks[3].y);
+      	}
+        var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+        writeMessage(canvas, message);
+      }, false);
+      
+      function drawCurve(x0, y0, x1, y1, x2, y2, x3, y3)
+		{
+			console.log("in function");
+			console.log(x0+" "+y0+" "+x1+" "+y1+" "+x2+" "+y2+" "+x3+" "+y3)
+			var currX, currY, prevX = x0, prevY = y0;
+			var aX, bX, cX, dX;
+			var aY, bY, cY, dY;
+			var t, linesNum, stepSize;
+		
+			// Matrix - X
+			dX = x0;
+			cX = (3*x1) - (3*x0);
+			bX = (3*x2) - (6*x1) + (3*x0);
+			aX = x3 - (3*x2) + (3*x1) - x0;
+		
+			// Matrix Y
+			dY = y0;
+			cY = (3*y1) - (3*y0);
+			bY = (3*y2) - (6*y1) + (3*y0);
+			aY = y3 - (3*y2) + (3*y1) - y0;
+		
+			linesNum = 100;
+			stepSize = 1/linesNum;
+			console.log(linesNum+" "+stepSize);
+		context.beginPath();
+			for (t = 0; t <= 1; t += stepSize){
+				console.log("done here "+t);
+				currX = aX*Math.pow(t, 3) + bX*Math.pow(t, 2) + cX*t + dX;
+				currY = aY*Math.pow(t, 3) + bY*Math.pow(t, 2) + cY*t + dY;
+				console.log(currX+" "+currY);
+				context.moveTo(prevX,prevY);
+				context.lineTo(currX,currY);
+				prevX = currX;
+				prevY = currY;
+			}
+			
+			context.strokeStyle = "red";
+			context.lineWidth = 1;
+			context.stroke();
+			i=0;
+			repaint();
+			
+		}    	
+		
+		function drawLine(x0,y0,x1,y1){
+			console.log(x0+" "+y0+" "+x1+" "+y1);
+			var dx = Math.abs(x1-x0);
+			var dy = Math.abs(y1-y0);
+			var sx = (x0 < x1) ? 1 : -1;
+			var sy = (y0 < y1) ? 1 : -1;
+			var err = dx-dy;
+			
+			while((x0!=x1)&&(y0!=y1)){console.log("drawing line")
+				drawPixel(x0,y0);  // Do what you need to for this
+				if ((x0==x1) && (y0==y1)) break;
+				var e2 = 2*err;
+				if (e2 >-dy){ err -= dy; x0  += sx; }
+				if (e2 < dx){ err += dx; y0  += sy; }
+			}  
+			i=0;
+			return true;
+		}
+
+		function drawPixel(x,y,c){
+			context.fillStyle = "red";
+			context.fillRect(x,y,2,2);
+		} 
+    </script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>2D Painter</title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+		<script src="javaScript.js"></script>
+    </head>
+    <body>
+		<nav>
+			<nav>
+			
+			<section id="shapes">
+				
+				<button type="button" onClick=setShape(1) id="line"><img src="lineSmall.png"><br><br></button>
+				<button type="button" onClick=setShape(2) id="circle"><img src="circleSmall.png"><br><br></button>
+				<button type="button" onClick=setShape(3) id="poly">
+					<img src="smallPoly.png">
+					<br>
+					Sides: <input id="sides" type="text" name="sides" value="3" size=1px />
+				</button>
+				<button type="button" onClick=setShape(4) id="bezz">
+					<img src="smallBezz.png">
+					<br>
+					Lines: <input id="curve_lines" type="text" name="curve_lines" value="10" size=1px />
+				</button>
+				<!-- <form>
+					<button type="reset" value="Reset" onClick="history.go(0)" class=reset_button >Refresh</button>
+				</form> -->
+			</section>
+			
+			<section id="colors">
+				
+				<button type="button" class=blue onClick=setColor("blue")></button>
+				<button type="button" class=green onClick=setColor("green")></button>
+				<button type="button" class=orange onClick=setColor("orange")></button>
+				<button type="button" class=red onClick=setColor("red")></button>
+				<button type="button" class=black onClick=setColor("white")></button>
+
+			</section>
+			
+		</nav>
+        <canvas id="myCanvas" width="1900" height="800"></canvas>
+    </body>
+</html>
