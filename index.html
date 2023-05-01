@@ -1,0 +1,53 @@
+
+<!-- Noam Rones -->
+
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Exe2</title>
+		<script src="js/myScript.js"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+		<div id="wrapper">
+			<header>
+			</header>
+			
+			<nav>
+				<ul>
+					<li class="file">
+						<input type="file" name="fileName" id="fileID">
+						<button type="button" value="Open" id="open" onClick=drawFile() class=button>Open</button></li>						
+					<li onClick=setOption(4) class=button id="Img"><img src="images/move.png" alt ="a"></li>
+					<li onClick=setOption(5) class=button id="Img"><img src="images/zoom.png" alt ="a">
+					<select name="cars" id="zoom">
+						<option value="0.25">0.25</option>
+						<option value="0.5">0.5</option>
+						<option value="0.75">0.75</option>
+						<option value="1" selected>1</option>
+						<option value="1.5">1.5</option>
+						<option value="2">2</option>
+						<option value="2.5">2.5</option>
+						<option value="5">5</option>
+						<option value="10">10</option>
+						</select></li>
+					<li onClick=setOption(6) class=button id="Img" ><img src="images/rotate.png" alt="Rotate">			
+					<input id="angle" type="text" name="angle" value="45" size=1px /></li>
+					<li><button  onClick=setOption(7) class=button>MirrorX</button></li>	
+					<li><button  onClick=setOption(8) class=button>MirrorY</button></li>	
+					<li><button  onClick=setOption(9) class=button>ShearX</button></li>	
+					<li><button  onClick=setOption(10) class=button>ShearY</button></li>	
+					<li onClick=undo() class=button id="Img"><img src="images/undo.png" alt="Rotate">Undo	</li>
+					<li><button type="reset" value="Reset" onClick="history.go(0)" class=button>Reset</button></li>	
+					<li class=button id="Img"><a href="javascript:void(0);" onclick="javascipt:window.open('images/help.pdf');" ><img src="images/help.png" alt ="a"> </a></li>
+				</ul>
+			</nav>
+			
+			<section>
+				<canvas onClick=drow() id="main-canvas" width="994" height="600"> </canvas>
+			</section>
+		</div>
+    </body>
+</html>
